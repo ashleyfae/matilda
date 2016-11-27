@@ -49,7 +49,6 @@ function matilda_maybe_display( $region = '' ) {
  * Sidebar is included if it's turned on in the settings panel.
  *
  * @uses  matilda_get_current_view()
- * @uses  matilda_get_sidebar_defaults()
  *
  * @param string $location
  *
@@ -60,14 +59,8 @@ function matilda_maybe_show_sidebar( $location = 'right' ) {
 	// Get the view.
 	$view = matilda_get_current_view();
 
-	// Default sidebar settings.
-	$defaults = matilda_get_sidebar_defaults();
-
-	// Get the default for THIS setting.
-	$default = array_key_exists( 'sidebar_' . $location . '_' . $view, $defaults ) ? $defaults[ 'sidebar_' . $location . '_' . $view ] : false;
-
 	// Get the option in the Customizer.
-	$show_sidebar = get_theme_mod( 'sidebar_' . $location . '_' . $view, $default );
+	$show_sidebar = get_theme_mod( 'sidebar_' . $location . '_' . $view, Matilda_Customizer::defaults( 'sidebar_' . $location . '_' . $view ) );
 
 	if ( $show_sidebar ) {
 		get_sidebar( $location );
@@ -84,9 +77,9 @@ function matilda_maybe_show_sidebar( $location = 'right' ) {
  */
 function matilda_entry_footer() {
 	?>
-	<footer class="entry-footer">
+    <footer class="entry-footer">
 		<?php the_tags( '<span class="post-tags"><i class="fa fa-tags"></i> ', ', ', '</span>' ); ?>
-	</footer>
+    </footer>
 	<?php
 }
 

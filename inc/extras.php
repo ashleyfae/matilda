@@ -40,7 +40,6 @@ function matilda_get_current_view() {
  *
  * @uses  matilda_get_current_view()
  * @uses  matilda_get_sidebar_locations()
- * @uses  matilda_get_sidebar_defaults()
  *
  * @param array $classes
  *
@@ -66,13 +65,9 @@ function matilda_body_classes( $classes ) {
 		// Get the view.
 		$view = matilda_get_current_view();
 
-		// Default sidebar settings.
-		$defaults = matilda_get_sidebar_defaults();
-
 		// Get the option in the Customizer.
 		foreach ( matilda_get_sidebar_locations() as $location ) {
-			$default      = array_key_exists( 'sidebar_' . $location . '_' . $view, $defaults ) ? $defaults[ 'sidebar_' . $location . '_' . $view ] : false;
-			$show_sidebar = get_theme_mod( 'sidebar_' . $location . '_' . $view, $default );
+			$show_sidebar = get_theme_mod( 'sidebar_' . $location . '_' . $view, Matilda_Customizer::defaults( 'sidebar_' . $location . '_' . $view ) );
 
 			if ( $show_sidebar ) {
 				$classes[] = $location . '-sidebar-is-on';
@@ -100,29 +95,6 @@ function matilda_get_sidebar_locations() {
 	);
 
 	return apply_filters( 'matilda/get-sidebar-locations', $locations );
-}
-
-/**
- * Get Sidebar Default Settings
- *
- * @since 1.0
- * @return array
- */
-function matilda_get_sidebar_defaults() {
-	$defaults = array(
-		'sidebar_left_blog'          => false,
-		'sidebar_right_blog'         => true,
-		'sidebar_left_single'        => false,
-		'sidebar_right_single'       => true,
-		'sidebar_left_page'          => false,
-		'sidebar_right_page'         => true,
-		'sidebar_left_book_archive'  => false,
-		'sidebar_right_book_archive' => false,
-		'sidebar_left_book_single'   => false,
-		'sidebar_right_book_single'  => false,
-	);
-
-	return apply_filters( 'matilda/get-sidebar-defaults', $defaults );
 }
 
 /**
@@ -186,6 +158,20 @@ function matilda_get_google_fonts_url() {
 }
 
 /**
+ * Excerpt Length
+ *
+ * @param int $length
+ *
+ * @since 1.0
+ * @return int
+ */
+function matilda_excerpt_length( $length ) {
+	return get_theme_mod( 'excerpt_length', Matilda_Customizer::defaults( 'excerpt_length' ) );
+}
+
+add_filter( 'excerpt_length', 'matilda_excerpt_length' );
+
+/**
  * Text Before Copyright
  *
  * Adds the text from the Customizer setting before the copyright message.
@@ -198,9 +184,9 @@ function matilda_text_before_copyright() {
 
 	if ( ! empty( $text ) || is_customize_preview() ) {
 		?>
-		<div id="matilda-text-before-copyright">
+        <div id="matilda-text-before-copyright">
 			<?php echo wpautop( $text ); ?>
-		</div>
+        </div>
 		<?php
 	}
 }

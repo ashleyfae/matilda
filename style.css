@@ -620,6 +620,35 @@ a:hover {
 /*--------------------------------------------------------------
 7.1 Header
 --------------------------------------------------------------*/
+#masthead {
+  background-size: cover;
+  padding: 10% 0;
+  text-align: center;
+}
+
+.site-branding {
+  background: #e08e79;
+  color: white;
+  display: inline-block;
+  padding: 1em 3em;
+}
+.site-branding a {
+  color: white;
+}
+
+.site-title {
+  letter-spacing: .1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.site-description {
+  font-size: 28.8px;
+  font-size: 1.8rem;
+  font-style: italic;
+  margin: 0;
+}
+
 /*--------------------------------------------------------------
 7.2 Posts & Pages
 --------------------------------------------------------------*/

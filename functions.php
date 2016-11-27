@@ -239,5 +239,5 @@ require get_template_directory() . '/inc/custom-header.php';
 /**
  * Customizer settings.
  */
-require get_template_directory() . '/inc/customizer/class-matilda-customizer.php';
+require get_template_directory() . '/inc/class-matilda-customizer.php';
 new Matilda_Customizer();

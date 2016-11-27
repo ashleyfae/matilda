@@ -50,7 +50,7 @@ function matilda_body_classes( $classes ) {
 	/*
 	 * Container
 	 */
-	$layout_style = get_theme_mod( 'layout_style', 'boxed' );
+	$layout_style = get_theme_mod( 'layout_style', Matilda_Customizer::defaults( 'layout_style' ) );
 	$classes[]    = 'layout-style-' . sanitize_html_class( $layout_style );
 
 	/*
@@ -108,6 +108,12 @@ function matilda_get_sidebar_locations() {
  */
 function matilda_custom_css() {
 	$css = '';
+
+	// Header BG
+	$header_bg = get_theme_mod( 'header_image_bg', Matilda_Customizer::defaults( 'header_image_bg' ) );
+	if ( $header_bg ) {
+		$css .= sprintf( '#masthead { background-image: url(%s); }', esc_url( $header_bg ) );
+	}
 
 	// @todo
 

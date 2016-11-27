@@ -97,6 +97,19 @@ function matilda_main_menu() {
 }
 
 /**
+ * Footer Menu
+ *
+ * @since 1.0
+ * @return void
+ */
+function matilda_footer_menu() {
+	wp_nav_menu( array(
+		'theme_location' => 'footer',
+		'menu_id'        => 'footer-menu'
+	) );
+}
+
+/**
  * Get Copyright Message
  *
  * @since 1.0

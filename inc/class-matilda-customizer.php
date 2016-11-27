@@ -51,6 +51,7 @@ class Matilda_Customizer {
 	public static function defaults( $key = '' ) {
 
 		$defaults = array(
+			'header_image_bg'               => get_template_directory_uri() . '/assets/images/header-bg.jpg',
 			'text_color'                 => '#485f5c',
 			'primary_color'              => '#c5e0dc',
 			'secondary_color'            => '#e08e79',
@@ -172,6 +173,7 @@ class Matilda_Customizer {
 		 * Populate Sections
 		 */
 
+		$this->header_image_section( $wp_customize );
 		$this->colours_section( $wp_customize );
 		$this->layout_section( $wp_customize );
 		$this->announcement_section( $wp_customize );
@@ -193,6 +195,31 @@ class Matilda_Customizer {
 		$wp_customize->get_control( 'header_textcolor' )->priority  = 71;
 		$wp_customize->get_control( 'background_color' )->section   = 'background_image';
 		$wp_customize->get_section( 'background_image' )->title     = esc_html__( 'Background', 'matilda' );
+
+	}
+
+	/**
+	 * Section: Header Image
+	 *
+	 * @param WP_Customize_Manager $wp_customize
+	 *
+	 * @access private
+	 * @since  1.0
+	 * @return void
+	 */
+	private function header_image_section( $wp_customize ) {
+
+		/* Header Image */
+		$wp_customize->add_setting( 'header_image_bg', array(
+			'default'           => self::defaults( 'header_image_bg' ),
+			'sanitize_callback' => 'esc_url_raw',
+			'transport'         => 'postMessage'
+		) );
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'header_image_bg', array(
+			'label'    => esc_html__( 'Header Background Image', 'matilda' ),
+			'section'  => 'header_image',
+			'settings' => 'header_image_bg'
+		) ) );
 
 	}
 

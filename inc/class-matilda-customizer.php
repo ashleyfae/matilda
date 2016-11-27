@@ -903,4 +903,26 @@ class Matilda_Customizer {
 		return ( empty( $input ) ) ? '' : absint( $input );
 	}
 
+	/**
+	 * Add JavaScript
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @return void
+	 */
+	public function live_preview() {
+
+		// Use minified libraries if SCRIPT_DEBUG is turned off
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+		wp_enqueue_script(
+			'matilda-customizer',
+			get_template_directory_uri() . '/assets/js/customizer-preview' . $suffix . '.js',
+			array( 'jquery', 'customize-preview' ),
+			$this->theme->get( 'Version' ),
+			true
+		);
+
+	}
+
 }

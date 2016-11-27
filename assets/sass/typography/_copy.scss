@@ -1,0 +1,20 @@
+body {
+    @include font-size(1.6);
+    color: $color-primary-dark;
+    font: {
+        family: $font-primary;
+    }
+    line-height: 1.8;
+}
+
+p {
+    margin: 0 0 1.5em;
+}
+
+blockquote {
+
+}
+
+code {
+    background: #f4f4f4;
+}

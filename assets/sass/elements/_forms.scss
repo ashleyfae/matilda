@@ -1,0 +1,22 @@
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="url"],
+input[type="text"],
+select,
+textarea {
+    background: #f4f4f4;
+    border: none;
+    display: block;
+    font: {
+        style: italic;
+    }
+    padding: 1em;
+    width: 100%;
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+@include placeholder();
